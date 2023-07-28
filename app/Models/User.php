@@ -43,6 +43,17 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    static public function getSingle($id){
+        return self::find($id);
+    }
+    static public function getAdmin(){
+        return self::select('users.*')
+                     ->where('user_type', '=', 1)
+                     ->where('is_deleted', '=', 0)
+                     ->orderBy('id', 'desc')
+                     ->get();
+    }
+
     static public function getEmailSingle($email){
         return self::where('email', '=', $email)->first();
     }
