@@ -20,11 +20,11 @@ class AdminMiddleware
                 return $next($request);
             } else {
                 Auth::logout();
-                return redirect(url(''));
+                return redirect(route('login'));
             }
         }else {
             Auth::logout();
-            return redirect(url(''));
+            return redirect(route('login'));
         }
     }
 }
