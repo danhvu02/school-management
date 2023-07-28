@@ -25,20 +25,15 @@
   <link rel="stylesheet" href="{{ url('public/plugins/daterangepicker/daterangepicker.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ url('public/plugins/summernote/summernote-bs4.min.css')}}">
+  @yield('styles')
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{ url('public/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
-  </div>
-
   @include('layouts.header')
   @yield('content')
   @include('layouts.footer')
-
-
 
 </div>
 <!-- ./wrapper -->
@@ -77,5 +72,8 @@
 <script src="{{ url('public/dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ url('public/dist/js/pages/dashboard.js')}}"></script>
+
+@yield('script')
+
 </body>
 </html>
