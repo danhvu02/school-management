@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\ClassSubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,6 +46,13 @@ Route::group(['middleware' => 'admin'], function (){
     //subject
     Route::resource('admin/subject', SubjectController::class);
     Route::get('admin/subject/{subject}', ['as' => 'subject.delete', 'uses' => 'App\Http\Controllers\SubjectController@destroy']);
+
+    //assign subject
+    Route::resource('admin/assign_subject', ClassSubjectController::class);
+    Route::get('admin/assign_subject/{assign_subject}', ['as' => 'assign_subject.delete', 'uses' => 'App\Http\Controllers\ClassSubjectController@destroy']);
+    Route::get('admin/assign_subject/{assign_subject}/edit_single', ['as' => 'assign_subject.edit_single', 'uses' => 'App\Http\Controllers\ClassSubjectController@edit_single']);
+    Route::put('admin/assign_subject/{assign_subject}/update_single', ['as' => 'assign_subject.update_single', 'uses' => 'App\Http\Controllers\ClassSubjectController@update_single']);
+
 
 });
 

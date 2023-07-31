@@ -19,17 +19,28 @@ class ClassModel extends Model
     static public function getRecord(){
         $return = self::select('classes.*', 'users.name as created_by_name')
                      ->join('users', 'users.id', 'classes.created_by');
-                     
+
                       if(!empty(Request::get('name'))){
                         $return = $return->where('classes.name', 'like', '%'.Request::get('name').'%');
                       }
-                      
+
                       if(!empty(Request::get('date'))){
                         $return = $return->whereDate('classes.created_at', '=', Request::get('date').'%');
                       }
         $return = $return->where('classes.is_deleted', '=', 0)
                          ->orderBy('classes.id', 'desc')
                          ->paginate(20);
+
+        return $return;
+    }
+
+    static public function getClass() {
+        $return = self::select('classes.*')
+                        ->join('users', 'users.id', 'classes.created_by')
+                        ->where('classes.is_deleted', '=', 0)
+                        ->where('classes.status', '=', 0)
+                        ->orderBy('classes.name', 'asc')
+                        ->get();
 
         return $return;
     }

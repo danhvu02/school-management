@@ -43,7 +43,7 @@
                           </select>
                         </div>
                         <div class="form-group col-md-3">
-                          <label for="date">Status</label>
+                          <label for="date">Date</label>
                           <input type="date" class="form-control" name="date" value="{{ Request::get('date') }}" placeholder="Date">
                         </div>
                         <div class="form-group col-md-3">

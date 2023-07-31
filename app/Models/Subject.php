@@ -18,20 +18,31 @@ class Subject extends Model
     static public function getRecord(){
         $return = self::select('subjects.*', 'users.name as created_by_name')
                      ->join('users', 'users.id', 'subjects.created_by');
-                     
+
                       if(!empty(Request::get('name'))){
                         $return = $return->where('subjects.name', 'like', '%'.Request::get('name').'%');
                       }
                       if(!empty(Request::get('type'))){
                         $return = $return->where('subjects.type', '=', Request::get('type'));
                       }
-                      
+
                       if(!empty(Request::get('date'))){
                         $return = $return->whereDate('subjects.created_at', '=', Request::get('date').'%');
                       }
         $return = $return->where('subjects.is_deleted', '=', 0)
                          ->orderBy('subjects.id', 'desc')
                          ->paginate(20);
+
+        return $return;
+    }
+
+    static public function getSubject(){
+        $return = self::select('subjects.*')
+                        ->join('users', 'users.id', 'subjects.created_by')
+                        ->where('subjects.is_deleted', '=', 0)
+                        ->where('subjects.status', '=', 0)
+                        ->orderBy('subjects.name', 'asc')
+                        ->get();
 
         return $return;
     }

@@ -19,7 +19,7 @@
                 <div class="form-group">
                   <label for="type">Subject Type</label>
                   <select name="type" class="form-control" required>
-                    <option value="" disabled>Select Type</option>
+                    <option value="" {{!isset($data['getRecord']) ? 'selected' : '' }} disabled>Select Type</option>
                     <option value="Theory" {{ old('type', $data['getRecord']->type ?? '') == 'Theory' ? 'selected' : ''}}>Theory</option>
                     <option value="Practical" {{ old('type', $data['getRecord']->type ?? '') == 'Practical' ? 'selected' : ''}}>Practical</option>
                   </select>
@@ -31,12 +31,11 @@
                     <option value="1" {{ old('status', $data['getRecord']->status ?? '') == 1 ? 'selected' : ''}}>Inactive</option>
                   </select>
                 </div>
-                
               </div>
               <!-- /.card-body -->
 
               <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">@if (isset($data['getRecord'])) Update @else Submit @endif</button>
               </div>
             </form>
 
@@ -45,4 +44,4 @@
         </div>
       </div>
     </div><!-- /.container-fluid -->
-  </section>
+</section>
