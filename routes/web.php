@@ -6,6 +6,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ClassSubjectController;
+use App\Http\Controllers\UserController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,17 +55,31 @@ Route::group(['middleware' => 'admin'], function (){
     Route::get('admin/assign_subject/{assign_subject}/edit_single', ['as' => 'assign_subject.edit_single', 'uses' => 'App\Http\Controllers\ClassSubjectController@edit_single']);
     Route::put('admin/assign_subject/{assign_subject}/update_single', ['as' => 'assign_subject.update_single', 'uses' => 'App\Http\Controllers\ClassSubjectController@update_single']);
 
-
+    //change password
+    Route::get('admin/change_password', [UserController::class, 'change_password'])->name('admin.change_password');
+    Route::post('admin/change_password', [UserController::class, 'update_change_password'])->name('admin.update_change_password');
 });
 
 Route::group(['middleware' => 'teacher'], function (){
     Route::get('teacher/dashboard', [DashboardController::class, 'dashboard'])->name('teacher.dashboard');
+
+    //change password
+    Route::get('teacher/change_password', [UserController::class, 'change_password'])->name('teacher.change_password');
+    Route::post('teacher/change_password', [UserController::class, 'update_change_password'])->name('teacher.update_change_password');
 });
 
 Route::group(['middleware' => 'student'], function (){
     Route::get('student/dashboard', [DashboardController::class, 'dashboard'])->name('student.dashboard');
+
+    //change password
+    Route::get('student/change_password', [UserController::class, 'change_password'])->name('student.change_password');
+    Route::post('student/change_password', [UserController::class, 'update_change_password'])->name('student.update_change_password');
 });
 
 Route::group(['middleware' => 'parent'], function (){
     Route::get('parent/dashboard', [DashboardController::class, 'dashboard'])->name('parent.dashboard');
+
+    //change password
+    Route::get('parent/change_password', [UserController::class, 'change_password'])->name('parent.change_password');
+    Route::post('parent/change_password', [UserController::class, 'update_change_password'])->name('parent.update_change_password');
 });
