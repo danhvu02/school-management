@@ -28,16 +28,12 @@
                 @endif
                 {{ csrf_field() }}
                 <div class="card-body">
-                    <div class="form-group">
-                        <label>Class Name</label>
-                        <select name="class_id" class="form-control" required>
-                            <option value="" {{!isset($data['getRecord']) ? 'selected' : '' }} disabled>Select Class</option>
-                            @foreach ($data['getClass'] as $class)
-                                <option value="{{$class->id}}" {{ old('class_id', $data['getRecord']->class_id ?? '') == $class->id ? 'selected' : ''}}>{{$class->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Class Name</label>
 
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label>Subject Name</label>
                         @foreach ($data['getSubject'] as $subject)

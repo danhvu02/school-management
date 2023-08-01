@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ClassSubjectController;
@@ -40,6 +41,11 @@ Route::group(['middleware' => 'admin'], function (){
     Route::get('admin/admin/edit/{id}', [AdminController::class, 'edit'])->name('admin.edit');
     Route::post('admin/admin/edit/{id}', [AdminController::class, 'update'])->name('admin.update');
     Route::get('admin/admin/delete/{id}', [AdminController::class, 'delete'])->name('admin.delete');
+
+    //student
+    Route::resource('admin/student', StudentController::class);
+    Route::get('admin/student/{student}', ['as' => 'student.delete', 'uses' => 'App\Http\Controllers\StudentController@destroy']);
+
 
     //class
     Route::resource('admin/class', ClassController::class);

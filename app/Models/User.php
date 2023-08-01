@@ -65,11 +65,29 @@ class User extends Authenticatable
 
         return $return;
     }
+    static public function getStudent(){
+        $return = self::select('users.*', 'classes.name as class_name')
+                     ->join('classes', 'classes.id', '=', 'users.class_id', 'left')
+                     ->where('users.user_type', '=', 3)
+                     ->where('users.is_deleted', '=', 0);
+        $return = $return->orderBy('users.id', 'desc')
+                         ->paginate(20);
+
+        return $return;
+    }
 
     static public function getEmailSingle($email){
         return self::where('email', '=', $email)->first();
     }
     static public function getTokenSingle($remember_token){
         return self::where('remember_token', '=', $remember_token)->first();
+    }
+    public function getProfile(){
+        if(!empty($this->profile_pic) && file_exists(public_path('upload/profile/'.$this->profile_pic))){
+            return url('upload/profile/'.$this->profile_pic);
+        } else {
+            return "";
+        }
+
     }
 }
